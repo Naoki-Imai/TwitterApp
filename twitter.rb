@@ -70,11 +70,27 @@ def removeTweet(twitter)
 
 end
 
+def editTweet(twitter)
+  showTweet(twitter)
+  print "修正したいツイート番号を選択してください："
+  editItemNum = gets.chomp.to_i - 1
+  print "タイトルを入力してください："
+  editTitle = gets.chomp
+  print "内容を入力してください："
+  editTweet = gets.chomp
+  twitter[editItemNum][:title] = editTitle
+  twitter[editItemNum][:tweet] = editTweet
+  t = Time.now
+  showTweet(twitter)
+  puts "修正しました"
+end
+
 twitter = []
 menus = [
   {menu:"ツイートする"},
   {menu:"ツイート一覧をみる"},
-  {menu:"ツイートを削除する"}
+  {menu:"ツイートを削除する"},
+  {menu:"ツイートを編集する"}
 ]
 menuIndex = 1
 continue = true
@@ -92,6 +108,10 @@ while continue
 
   elsif @selectMenu == "3"
     removeTweet(twitter)
+
+  elsif @selectMenu == "4"
+    editTweet(twitter)
+
   elsif @selectMenu == "0"
     Launchy.open "https://twitter.com/home?lang=ja"
   else
